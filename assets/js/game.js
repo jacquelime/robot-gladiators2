@@ -1,19 +1,47 @@
 
+// Game States
+// "WIN" - Player robot has defeated all enemy robots
+//      *Fight all enemy robots
+//      *Defeat each enemy robot
+// LOSE" - Player robot's health is zero or less
+
 // -----------------------------------Global Variables-------------------------------------------
 
-
-// What's your robots name?
 var playerName = window.prompt("What is your robot's name?");
 var playerHealth = 100;
 var playerAttack = 10;
 var playerMoney = 10;
+var confirmSkip = true;
 
-// You can also log multiple values at once like this 
 console.log(playerName, playerAttack, playerHealth);
 
-var enemyName = "Roborto";
+var enemyNames = ["Roborto", "Amy Android", "Robo Trumble"];
 var enemyHealth = 50;
 var enemyAttack = 12;
+
+for(var i = 0; i < enemyNames.length; i++) {
+    console.log(enemyNames[i]);
+    console.log(i);
+    console.log(enemyNames[i] + " is at " + i + " index ");
+    for(var i = 0; i < enemyNames.length; i++) {
+        console.log(enemyNames[i]);
+    }
+
+}
+
+// i++;
+// i -= 1;
+// // shortcut for i = i + 1;
+// i = 0;
+// i = i + 1; // i = 1;
+// i = i + 1; // i = 2;
+// ...
+// var str = "";
+// str += enemyNames[0]; // "Roborto"
+// str += enemyNames[1]; // "RobortoAmy Android"
+// str = str + " " + enemyNames[2]; // "RobortoAmy AndroidRoboTrumble"
+
+//--------------------------------------------- FUNCTIONS ---------------------------------------
 
 function changeToLowerCase(string) {
     return string.toLowerCase ()
@@ -23,7 +51,8 @@ var fight = function()
     window.alert("Welcome to Robot Gladiators");
     
 
-    var promptFight = (window.prompt("Would you like to FIGHT or SKIP this battle? Enter 'FIGHT' or 'SKIP' to choose.")) ;
+    var promptFight = (window.prompt("Would you like to FIGHT or SKIP this battle? Enter 'FIGHT' or 'SKIP' to choose."));
+    promptFight = promptFight.toLowerCase();
     console.log(
         promptFight
     )
@@ -49,23 +78,25 @@ var fight = function()
     enemyHealth = enemyHealth - playerAttack;
     // Log a resulting message to the console so we know that it worked.
     console.log(
-        playerName + " attacked " + enemyName + ". " + enemyName + " now has " + enemyHealth + " health remaining "
+        playerName + " attacked " + enemyNames + ". " + enemyNames + " now has " + enemyHealth + " health remaining "
     );
     // check enemy's health
     if (enemyHealth <= 0) 
     {
-        window.alert(enemyName + " has died! ");
+        window.alert(enemyNames + " has died! ");
     }
     else {
-        window.alert(enemyName + " still has " + enemyHealth + " health left.");
+        window.alert(enemyNames + " still has " + enemyHealth + " health left.");
     }
     // Subtract the value of `enemyAttack` from the value of `playerHealth` and use that result to update the value in the `playerHealth` variable.
     playerHealth = playerHealth - enemyAttack;
 
     // Log a resulting message to the console so we know that it worked.
         console.log(
-            enemyName + " attacked " + playerName + ". " + playerName + " now has " + playerHealth + " health remaining."
+            enemyNames + " attacked " + playerName + ". " + playerName + " now has " + playerHealth + " health remaining."
         )
+
+       
 
     // check player's health
     if (playerHealth <=0) {
@@ -78,12 +109,15 @@ var fight = function()
 
 
     // if player chooses to skip
-} else if (promptFight === "skip" || promptFight === "SKIP") {
+} else if (promptFight === "skip") {
     // confirm user wants to skip
     var confirmSkip = window.confirm("Are you sure you'd like to quit?");
     // if yes (true), leave fight
     if (confirmSkip) {
-        window.alert(playerName + "has decided to skip this fight. Goodbye!");
+        window.alert(playerName + " has decided to skip this fight. Goodbye!");
+    if (confirmSkip) {
+        // 
+    }
     // subtract money for skipping
     playerMoney = playerMoney - 2;
     }
@@ -99,14 +133,12 @@ var fight = function()
 
 };
 // ---------------------------------------------Main Processes--------------------------------------------
-fight();
+for(var i = 0; i < enemyNames.length; i++) {
+    fight(enemyNames[i]);
+}
+  
 
 
-/*
-It can work like 
-this too if you really need it too.
-You won't always 
-need it to, but sometimes you 
-will
-*/
+
+
 
